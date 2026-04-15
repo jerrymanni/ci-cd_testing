@@ -81,3 +81,36 @@ jobs:
             - name: Upload wheel to S3
               run: |
                 aws s3 cp dist/*.whl s3://jm-testi-bucket/wheels/
+
+    bump-version:
+        runs-on: ubuntu-latest
+        needs: tests
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.event.action == 'closed' && github.event.pull_request.merged == true
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+                token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.12'
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v2
+              with:
+                version: "latest"
+
+            - name: Bump version
+              run: uv version --bump patch
+
+            - name: Push version bump
+              run: |
+                git config user.name "github-actions"
+                git config user.email "github-actions@github.com"
+                git add pyproject.toml
+                git commit -m "Bump patch version"
+                git push
