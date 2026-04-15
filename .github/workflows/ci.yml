@@ -1,0 +1,14 @@
+name: CI Pipeline
+
+on:
+    push:
+        branches:
+            - "*"
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Run code
+              run: echo "Running CI pipeline..."
