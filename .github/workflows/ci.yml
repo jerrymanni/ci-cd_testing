@@ -40,3 +40,6 @@ jobs:
 
             - name: Lint code
               run: ruff check .
+
+            - name: Run tests
+              run: pytest -v -s
