@@ -9,3 +9,8 @@ dependencies = [
     "pytest>=9.0.3",
     "ruff>=0.15.10",
 ]
+classifiers = ["Private :: Do Not Upload"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
