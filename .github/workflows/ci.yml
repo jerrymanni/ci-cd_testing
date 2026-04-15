@@ -31,7 +31,9 @@ jobs:
                 version: "latest"
 
             - name: Install ruff
-              uses: astral-sh/setup-ruff@v1
+              uses: astral-sh/ruff-action@v3
+              with:
+                version: "latest"
 
             - name: Install dependencies
               run: uv sync
