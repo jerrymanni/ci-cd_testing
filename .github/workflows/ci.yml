@@ -25,15 +25,8 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v5
 
-            - name: Set up Python
-              uses: actions/setup-python@v6
-              with:
-                  python-version: '3.12'
-
-            - name: Install uv
-              uses: astral-sh/setup-uv@v7
-              with:
-                version: "latest"
+            - name: Setup Python & uv
+              uses: ./.github/actions/setup-python-uv
 
             - name: Install ruff
               uses: astral-sh/ruff-action@v3
@@ -57,15 +50,8 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v5
 
-            - name: Set up Python
-              uses: actions/setup-python@v6
-              with:
-                  python-version: '3.12'
-
-            - name: Install uv
-              uses: astral-sh/setup-uv@v7
-              with:
-                version: "latest"
+            - name: Setup Python & uv
+              uses: ./.github/actions/setup-python-uv
 
             - name: build wheel
               run: uv build --wheel
